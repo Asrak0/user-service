@@ -2,6 +2,7 @@ package com.example.user_service.service;
 
 import com.example.user_service.dto.PreferencesDTO;
 import com.example.user_service.model.User;
+import com.example.user_service.model.WatchHistory;
 import com.example.user_service.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

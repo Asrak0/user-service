@@ -2,6 +2,7 @@ package com.example.user_service.controller;
 
 import com.example.user_service.dto.PreferencesDTO;
 import com.example.user_service.model.User;
+import com.example.user_service.model.WatchHistory;
 import com.example.user_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @PostMapping("/register")
     public User registerUser(@RequestBody User user){
@@ -32,9 +33,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}/preferences")
-    public ResponseEntity<String> updatePreferences(
-            @PathVariable Long userId,
-            @RequestBody PreferencesDTO newPreferences){
+    public ResponseEntity<String> updatePreferences(@PathVariable Long userId, @RequestBody PreferencesDTO newPreferences){
         userService.updateUserPreferences(userId, newPreferences);
         return ResponseEntity.ok("User preferences updated");
     }
