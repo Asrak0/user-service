@@ -1,12 +1,13 @@
 package com.example.user_service.controller;
 
-import com.example.user_service.dto.PreferencesDTO;
+import com.example.user_service.dto.Preferences;
 import com.example.user_service.model.User;
-import com.example.user_service.model.WatchHistory;
 import com.example.user_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -14,6 +15,11 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
 
     @PostMapping("/register")
     public User registerUser(@RequestBody User user){
@@ -33,13 +39,13 @@ public class UserController {
     }
 
     @PutMapping("/{userId}/preferences")
-    public ResponseEntity<String> updatePreferences(@PathVariable Long userId, @RequestBody PreferencesDTO newPreferences){
+    public ResponseEntity<String> updatePreferences(@PathVariable Long userId, @RequestBody Preferences newPreferences){
         userService.updateUserPreferences(userId, newPreferences);
         return ResponseEntity.ok("User preferences updated");
     }
 
     @GetMapping("/{userId}/preferences")
-    public PreferencesDTO getPreferences(@PathVariable Long userId) {
+    public Preferences getPreferences(@PathVariable Long userId) {
         return userService.getUserPreferences(userId);
     }
 

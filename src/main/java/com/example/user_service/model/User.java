@@ -1,5 +1,6 @@
 package com.example.user_service.model;
 
+import com.example.user_service.dto.Preferences;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String emailId;
-
-    private String preferences;
+    @Embedded
+    private Preferences preferences;
 
 //    Non-owning side of the relationship marked by "mappedBy"
 //    cascade = CascadeType.ALL makes sure saving any watch history
@@ -33,7 +34,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String userName, String userPassword, String emailId, String preferences, List<WatchHistory> watchHistory) {
+    public User(Long id, String userName, String userPassword, String emailId, Preferences preferences, List<WatchHistory> watchHistory) {
         this.id = id;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -75,11 +76,11 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public String getPreferences() {
+    public Preferences getPreferences() {
         return preferences;
     }
 
-    public void setPreferences(String preferences) {
+    public void setPreferences(Preferences preferences) {
         this.preferences = preferences;
     }
 

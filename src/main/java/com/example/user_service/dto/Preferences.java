@@ -1,15 +1,18 @@
 package com.example.user_service.dto;
 
+import jakarta.persistence.Embeddable;
+
 import java.util.List;
 
-public class PreferencesDTO {
+@Embeddable
+public class Preferences {
     private List<String> genres;
     private List<String> actors;
     private List<String> directors;
 
-    public PreferencesDTO(){}
+    public Preferences(){}
 
-    public PreferencesDTO(List<String> genres, List<String> actors, List<String> directors) {
+    public Preferences(List<String> genres, List<String> actors, List<String> directors) {
         this.genres = genres;
         this.actors = actors;
         this.directors = directors;
