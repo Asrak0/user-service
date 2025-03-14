@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'chmod +x mvnw'  // Grant execute permission
-                sh './mvnw clean package -U'
+                sh './mvnw clean package'
             }
         }
         stage('Test') {
