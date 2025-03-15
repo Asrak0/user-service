@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+        DATABASE_URL = "${env.DATABASE_URL}"
+        DATABASE_USER = "${env.DATABASE_USER}"
+        DATABASE_PASSWORD = "${env.DATABASE_PASSWORD}"
+    }
     stages {
         stage('Checkout Code') {
             steps {
