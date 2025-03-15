@@ -1,12 +1,10 @@
 pipeline {
     agent any
     environment {
-        SPRING_DATASOURCE_URL = "${env.SPRING_DATASOURCE_URL}"
-        SPRING_DATASOURCE_USERNAME = "${env.DATABASE_USER}"
-        SPRING_DATASOURCE_PASSWORD = "${env.DATABASE_PASSWORD}"
-        SPRING_APPLICATION_NAME = 'user-service'
-        SPRING_JPA_HIBERNATE_DDL_AUTO = 'update'
-        SPRING_DATASOURCE_DRIVER_CLASS_NAME = 'com.mysql.cj.jdbc.Driver'
+        SPRING_DATASOURCE_URL = "jdbc:mysql://user-db:3306/user_db?allowPublicKeyRetrieval=true&useSSL=false"
+        SPRING_DATASOURCE_USERNAME = "user_service"
+        SPRING_DATASOURCE_PASSWORD = credentials('SPRING_DATASOURCE_PASSWORD')
+        SPRING_DATASOURCE_DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver"
     }
     stages {
         stage('Check Environment') {
