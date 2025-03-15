@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        DATABASE_URL = "${env.DATABASE_URL}"
-        DATABASE_USER = "${env.DATABASE_USER}"
-        DATABASE_PASSWORD = "${env.DATABASE_PASSWORD}"
+        SPRING_DATASOURCE_URL = "jdbc:mysql://user-db:3306/user_db"
+        SPRING_DATASOURCE_USERNAME = "${env.DATABASE_USER}"
+        SPRING_DATASOURCE_PASSWORD = "${env.DATABASE_PASSWORD}"
         SPRING_APPLICATION_NAME = 'user-service'
         SPRING_JPA_HIBERNATE_DDL_AUTO = 'update'
         SPRING_DATASOURCE_DRIVER_CLASS_NAME = 'com.mysql.cj.jdbc.Driver'
