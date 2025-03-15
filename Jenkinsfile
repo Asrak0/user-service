@@ -4,6 +4,9 @@ pipeline {
         DATABASE_URL = "${env.DATABASE_URL}"
         DATABASE_USER = "${env.DATABASE_USER}"
         DATABASE_PASSWORD = "${env.DATABASE_PASSWORD}"
+        SPRING_APPLICATION_NAME = 'user-service'
+        SPRING_JPA_HIBERNATE_DDL_AUTO = 'update'
+        SPRING_DATASOURCE_DRIVER_CLASS_NAME = 'com.mysql.cj.jdbc.Driver'
     }
     stages {
         stage('Checkout Code') {
