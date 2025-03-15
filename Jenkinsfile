@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        SPRING_DATASOURCE_URL = "jdbc:mysql://user-db:3306/user_db"
+        SPRING_DATASOURCE_URL = "${env.SPRING_DATASOURCE_URL}"
         SPRING_DATASOURCE_USERNAME = "${env.DATABASE_USER}"
         SPRING_DATASOURCE_PASSWORD = "${env.DATABASE_PASSWORD}"
         SPRING_APPLICATION_NAME = 'user-service'
@@ -9,6 +9,11 @@ pipeline {
         SPRING_DATASOURCE_DRIVER_CLASS_NAME = 'com.mysql.cj.jdbc.Driver'
     }
     stages {
+        stage('Check Environment') {
+             steps {
+                sh 'echo "SPRING_DATASOURCE_URL is: $SPRING_DATASOURCE_URL"'
+             }
+        }
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/Asrak0/user-service.git'
