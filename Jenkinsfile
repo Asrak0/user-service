@@ -28,7 +28,9 @@ pipeline {
                 sh './mvnw test'
             }
         }
-        script {
+        stage('Deploy') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_CREDENTIALS', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     echo 'Deploying user-service...'
 
                     // Stop and remove the old container if it's running
@@ -39,13 +41,13 @@ pipeline {
 
                     // Build and tag the new Docker image
                     sh '''
-                        docker build -t asrak0/user-service:latest .
+                        docker build -t $DOCKER_USER/user-service:latest .
                     '''
 
                     // Push the image to Docker Hub (or another registry)
                     sh '''
-                        docker login -u asrak0 -p ${DOCKER_HUB_PASSWORD}
-                        docker push asrak0/user-service:latest
+                        docker login -u $DOCKER_USER -p $DOCKER_PASS
+                        docker push $DOCKER_USER/user-service:latest
                     '''
 
                     // Run the new container
@@ -56,8 +58,10 @@ pipeline {
                             -e SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME \
                             -e SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD \
                             -e SPRING_DATASOURCE_DRIVER_CLASS_NAME=$SPRING_DATASOURCE_DRIVER_CLASS_NAME \
-                            asrak0/user-service:latest
+                            $DOCKER_USER/user-service:latest
                     '''
                 }
+            }
+        }
     }
 }
