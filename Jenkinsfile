@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_HOST = "https://docker:2376"
+        DOCKER_HOST = "tcp://docker:2376"
         DOCKER_CERT_PATH = "/certs/client"
         DOCKER_TLS_VERIFY = "1"
         SPRING_DATASOURCE_URL = "jdbc:mysql://user-db:3306/user_db?allowPublicKeyRetrieval=true&useSSL=false"
