@@ -1,6 +1,7 @@
 pipeline {
     agent any
     environment {
+        DOCKER_HOST = "tcp://jenkins-docker:2376"
         SPRING_DATASOURCE_URL = "jdbc:mysql://user-db:3306/user_db?allowPublicKeyRetrieval=true&useSSL=false"
         SPRING_DATASOURCE_USERNAME = "user_service"
         SPRING_DATASOURCE_PASSWORD = credentials('SPRING_DATASOURCE_PASSWORD')
